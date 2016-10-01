@@ -15,9 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.VideoView;
 
+import com.blumental.lifesliceapp.App;
 import com.blumental.lifesliceapp.R;
 import com.blumental.lifesliceapp.presenter.VideosPresenter;
-import com.blumental.lifesliceapp.presenter.VideosPresenterImpl;
 import com.blumental.lifesliceapp.view.adapter.VideoListAdapter;
 
 import butterknife.BindView;
@@ -38,7 +38,7 @@ public class VideosFragment extends Fragment implements VideosView {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        presenter = new VideosPresenterImpl();
+        presenter = App.component.videosPresenter();
         presenter.setView(this);
     }
 

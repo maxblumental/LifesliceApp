@@ -9,8 +9,12 @@ public class VideosPresenterImpl implements VideosPresenter {
 
     private VideosView view;
 
-    @Inject
     GetVideoListByTagInteractor interactor;
+
+    @Inject
+    public VideosPresenterImpl(GetVideoListByTagInteractor interactor) {
+        this.interactor = interactor;
+    }
 
     public void setView(VideosView view) {
         this.view = view;
