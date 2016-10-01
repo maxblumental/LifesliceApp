@@ -15,6 +15,7 @@ import com.blumental.lifesliceapp.interactor.ImageDownloader;
 import com.blumental.lifesliceapp.model.Record;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import rx.functions.Action1;
 
 import static android.support.v4.content.res.ResourcesCompat.getDrawable;
@@ -22,8 +23,6 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 class ViewHolder extends RecyclerView.ViewHolder {
-
-    private static final int VIDEO_URL_KEY = 42;
 
     @BindView(R.id.avatar)
     ImageView avatar;
@@ -36,6 +35,7 @@ class ViewHolder extends RecyclerView.ViewHolder {
 
     ViewHolder(View itemView) {
         super(itemView);
+        ButterKnife.bind(this, itemView);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,7 +45,7 @@ class ViewHolder extends RecyclerView.ViewHolder {
     }
 
     void bind(Record record, LruCache<String, Bitmap> avatarCache) {
-        itemView.setTag(VIDEO_URL_KEY, record.getVideoUrl());
+        itemView.setTag(record.getVideoUrl());
         setAvatar(record, avatarCache);
         username.setText(record.getUsername());
     }

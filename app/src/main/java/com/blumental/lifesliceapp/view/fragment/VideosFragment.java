@@ -13,15 +13,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.VideoView;
 
 import com.blumental.lifesliceapp.App;
 import com.blumental.lifesliceapp.R;
+import com.blumental.lifesliceapp.model.Record;
 import com.blumental.lifesliceapp.presenter.VideosPresenter;
 import com.blumental.lifesliceapp.view.adapter.VideoListAdapter;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.widget.Toast.LENGTH_LONG;
+import static android.widget.Toast.makeText;
 
 public class VideosFragment extends Fragment implements VideosView {
 
@@ -34,6 +41,11 @@ public class VideosFragment extends Fragment implements VideosView {
 
     @BindView(R.id.videoList)
     RecyclerView videoList;
+
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
+    private VideoListAdapter adapter;
 
     @Override
     public void onAttach(Context context) {
@@ -50,7 +62,8 @@ public class VideosFragment extends Fragment implements VideosView {
         ButterKnife.bind(this, view);
 
         videoList.setLayoutManager(new LinearLayoutManager(getContext()));
-        videoList.setAdapter(new VideoListAdapter());
+        adapter = new VideoListAdapter();
+        videoList.setAdapter(adapter);
 
         return view;
     }
@@ -73,6 +86,26 @@ public class VideosFragment extends Fragment implements VideosView {
     public void onDetach() {
         super.onDetach();
         presenter.detach();
+    }
+
+    @Override
+    public void showRecords(List<Record> records) {
+        adapter.setRecords(records);
+    }
+
+    @Override
+    public void showError(String message) {
+        makeText(getContext(), message, LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.GONE);
     }
 
     private void registerTagChangeReceiver() {

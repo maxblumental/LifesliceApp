@@ -31,6 +31,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     public void setRecords(List<Record> records) {
         this.records = records;
+        notifyDataSetChanged();
     }
 
     @Override
