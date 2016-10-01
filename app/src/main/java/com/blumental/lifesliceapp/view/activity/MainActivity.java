@@ -35,4 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.setupWithViewPager(viewPager);
     }
+
+    public void switchToVideosTab() {
+        viewPager.setCurrentItem(1, true);
+    }
 }
