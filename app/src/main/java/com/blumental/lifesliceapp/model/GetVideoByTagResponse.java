@@ -1,6 +1,6 @@
 package com.blumental.lifesliceapp.model;
 
-public class TagsResponse {
+public class GetVideoByTagResponse {
     private String code;
 
     private String success;
