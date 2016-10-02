@@ -19,6 +19,8 @@ public class VideoListAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     private LruCache<String, Bitmap> avatarCache;
 
+    private View.OnClickListener listener;
+
     public VideoListAdapter() {
         long totalRamSize = Runtime.getRuntime().maxMemory();
         avatarCache = new LruCache<String, Bitmap>((int) (totalRamSize / 8)) {
@@ -29,6 +31,10 @@ public class VideoListAdapter extends RecyclerView.Adapter<ViewHolder> {
         };
     }
 
+    public void setItemClickListener(View.OnClickListener listener) {
+        this.listener = listener;
+    }
+
     public void setRecords(List<Record> records) {
         this.records = records;
         notifyDataSetChanged();
@@ -37,7 +43,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = from(parent.getContext()).inflate(R.layout.video_list_item, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, listener);
     }
 
     @Override

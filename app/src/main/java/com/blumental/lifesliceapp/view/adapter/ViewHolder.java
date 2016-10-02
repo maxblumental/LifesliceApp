@@ -33,15 +33,10 @@ class ViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.username)
     TextView username;
 
-    ViewHolder(View itemView) {
+    ViewHolder(View itemView, View.OnClickListener listener) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+        itemView.setOnClickListener(listener);
     }
 
     void bind(Record record, LruCache<String, Bitmap> avatarCache) {
